@@ -14,7 +14,11 @@ fmt.Println("Get your tickets here to attend")
 	var userTickets int
 	// ask a user for their name
 
-	userName = "Bruka"
+	fmt.Println(remainingTickets)
+	fmt.Println(&remainingTickets)
+	fmt.Scan(&userName)
+ 
+	//userName = "Bruka"
 	userTickets = 2
 
 	fmt.Printf("user %v booked %v tickets.\n", userName, userTickets)
