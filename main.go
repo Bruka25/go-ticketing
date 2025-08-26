@@ -40,6 +40,11 @@ for {
 	fmt.Println("Enter number of tickets:")
 	fmt.Scan(&userTickets)
 
+	if userTickets > remainingTickets {
+		fmt.Printf("we have only %v remaining ticktes, so you can't book %v tickets\n", remainingTickets, userTickets)
+		continue
+	}
+ 
 	remainingTickets = remainingTickets - userTickets
 	bookings = append(bookings, firstName + " " + lastName)
 	//userName = "Bruka
