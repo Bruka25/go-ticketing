@@ -40,14 +40,10 @@ for {
 	fmt.Println("Enter number of tickets:")
 	fmt.Scan(&userTickets)
 
-	if userTickets > remainingTickets {
-		fmt.Printf("we have only %v remaining ticktes, so you can't book %v tickets\n", remainingTickets, userTickets)
-		continue
-	}
- 
-	remainingTickets = remainingTickets - userTickets
+	if userTickets <= remainingTickets {
+		remainingTickets = remainingTickets - userTickets
 	bookings = append(bookings, firstName + " " + lastName)
-	//userName = "Bruka
+	//userName = "Bruka 
 	//userTickets = 2
 	
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
@@ -64,7 +60,9 @@ for {
 		fmt.Println("The conference is booked out")
 		break
 	}
-}
+	} else {
+	fmt.Printf("we have only %v remaining ticktes, so you can't book %v tickets\n", remainingTickets, userTickets)
+	}
 	
-	
+}	
 }
