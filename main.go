@@ -17,7 +17,7 @@ fmt.Println("Get your tickets here to attend")
 	var email string
 	var userTickets uint
 	// ask a user for their name
-	var bookings [50]string
+	var bookings []string
 	
 
 	//fmt.Println(remainingTickets)
@@ -36,13 +36,13 @@ fmt.Println("Get your tickets here to attend")
 	fmt.Scan(&userTickets)
 
 	remainingTickets = remainingTickets - userTickets
-	bookings[0] = firstName + " " + lastName
-	//userName = "Bruka"
+	bookings = append(bookings, firstName + " " + lastName)
+	//userName = "Bruka
 	//userTickets = 2
-	fmt.Printf("The whole array: %v\n", bookings)
+	fmt.Printf("The whole slice: %v\n", bookings)
 	fmt.Printf("The first value: %v\n", bookings[0])
-	fmt.Printf("The type of array: %T\n", bookings)
-	fmt.Printf("Array Length: %v\n", len(bookings))
+	fmt.Printf("The type of slice: %T\n", bookings)
+	fmt.Printf("slice Length: %v\n", len(bookings))
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
 }
