@@ -6,6 +6,7 @@ func main() {
 var confName = "Go conference"
 const conferenceTickets uint = 50
 var remainingTickets uint= 50
+var bookings = []string{}
 fmt.Printf("conferenceTickets is %T, confName is %T, remainingTickets is %T\n", conferenceTickets, confName, remainingTickets)
 fmt.Printf("welcome to %v booking application\n", confName)
 fmt.Printf("we have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
@@ -18,7 +19,7 @@ for {
 	var email string
 	var userTickets uint
 	// ask a user for their name
-	var bookings = []string{}
+	
 	
 
 	//fmt.Println(remainingTickets)
