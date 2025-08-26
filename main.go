@@ -54,6 +54,11 @@ for {
 		firstNames = append(firstNames, names[0])
 	}
 	fmt.Printf("The First names of bookings are: %v\n", firstNames)
+	if  remainingTickets == 0 {
+		//end the program
+		fmt.Println("The conference is booked out")
+		break
+	}
 }
 	
 	
