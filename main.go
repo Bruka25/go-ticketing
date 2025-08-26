@@ -67,7 +67,15 @@ for {
 	}
 	
 	} else {
-	fmt.Println("your input data is invalid, kindly try again")
+		if !isValidName {
+			fmt.Println("your first name or last name is too short")
+		}
+		if !isValidEmail {
+			fmt.Println("your email address is not valid")
+		}
+		if !isValidTicketNumber {
+			fmt.Println("your ticket number is invalid")
+		}
 	}
 	
 }	
