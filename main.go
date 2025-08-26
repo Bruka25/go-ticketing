@@ -17,6 +17,7 @@ fmt.Println("Get your tickets here to attend")
 
 for {
 
+
 	var firstName string
 	var lastName string
 	var email string
@@ -40,7 +41,11 @@ for {
 	fmt.Println("Enter number of tickets:")
 	fmt.Scan(&userTickets)
 
-	if userTickets <= remainingTickets {
+	isValidName := len(firstName) >= 2 && len(lastName) >= 2
+	isValidEmail := strings.Contains(email, "@")
+	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
+
+	if isValidName && isValidEmail && isValidTicketNumber {
 		remainingTickets = remainingTickets - userTickets
 	bookings = append(bookings, firstName + " " + lastName)
 	//userName = "Bruka 
@@ -60,8 +65,9 @@ for {
 		fmt.Println("The conference is booked out")
 		break
 	}
+	
 	} else {
-	fmt.Printf("we have only %v remaining ticktes, so you can't book %v tickets\n", remainingTickets, userTickets)
+	fmt.Println("your input data is invalid, kindly try again")
 	}
 	
 }	
