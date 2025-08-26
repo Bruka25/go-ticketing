@@ -11,7 +11,8 @@ fmt.Printf("welcome to %v booking application\n", confName)
 fmt.Printf("we have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
 fmt.Println("Get your tickets here to attend")
 
-    
+for {
+
 	var firstName string
 	var lastName string
 	var email string
@@ -23,7 +24,7 @@ fmt.Println("Get your tickets here to attend")
 	//fmt.Println(remainingTickets)
 	//fmt.Println(&remainingTickets)
 	fmt.Println("Enter your first name:")
-	fmt.Scan(&firstName)
+	 fmt.Scan(&firstName)
 
 	fmt.Println("Enter your last name:")
 	fmt.Scan(&lastName)
@@ -43,4 +44,7 @@ fmt.Println("Get your tickets here to attend")
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
 	fmt.Printf("These are all the bookings in our system: %v\n", bookings)
+}
+	
+	
 }
