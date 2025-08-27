@@ -18,7 +18,7 @@ fmt.Printf("conferenceTickets is %T, confName is %T, remainingTickets is %T\n", 
 for {
 
 
-	
+	firstName, lastName, email, userTickets := getUserInput()
 
 	isValidName, isValidEmail, isValidTicketNumber :=  validateInput(firstName, lastName, email, userTickets, remainingTickets)
 
@@ -84,7 +84,7 @@ func validateInput(firstName string, lastName string, email string, userTickets 
 	
 }
 
-func getUserInput {
+func getUserInput()(string, string, string, uint) {
 	var firstName string
 	var lastName string
 	var email string
@@ -107,5 +107,7 @@ func getUserInput {
 
 	fmt.Println("Enter number of tickets:")
 	fmt.Scan(&userTickets)
+
+	return firstName, lastName, email, userTickets
 
 }
