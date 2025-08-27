@@ -10,6 +10,9 @@ var confName = "Go conference"
 const conferenceTickets uint = 50
 var remainingTickets uint= 50
 var bookings = []string{}
+
+greetUsers(confName)
+
 fmt.Printf("conferenceTickets is %T, confName is %T, remainingTickets is %T\n", conferenceTickets, confName, remainingTickets)
 fmt.Printf("welcome to %v booking application\n", confName)
 fmt.Printf("we have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
@@ -79,4 +82,8 @@ for {
 	}
 	
 }	
+}
+
+func greetUsers(confName string) {
+	fmt.Printf("Welcome to %v the booking application!\n", confName)
 }
