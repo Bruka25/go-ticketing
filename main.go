@@ -16,31 +16,23 @@ greetUsers(confName, int(conferenceTickets), int(remainingTickets))
 fmt.Printf("conferenceTickets is %T, confName is %T, remainingTickets is %T\n", conferenceTickets, confName, remainingTickets)
 
 for {
-
+   
 
 	firstName, lastName, email, userTickets := getUserInput()
 
 	isValidName, isValidEmail, isValidTicketNumber :=  validateInput(firstName, lastName, email, userTickets, remainingTickets)
 
-	if isValidName && isValidEmail && isValidTicketNumber {
-		remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName + " " + lastName)
-	//userName = "Bruka 
-	//userTickets = 2
 	
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
-    
+	bookTicket(remainingTickets, firstName, lastName, email, userTickets, bookings, confName)
+	
 	// function to call the first ticket of the ticket bookers
 	var firstNames = getFirstName(bookings)
 	fmt.Printf("The first names of bookings are: %v\n", firstNames)
 
-	if  remainingTickets == 0 {
+	if remainingTickets == 0 {
 		//end the program
 		fmt.Println("The conference is booked out")
 		break
-	}
-	
 	} else {
 		if !isValidName {
 			fmt.Println("your first name or last name is too short")
@@ -110,4 +102,16 @@ func getUserInput()(string, string, string, uint) {
 
 	return firstName, lastName, email, userTickets
 
+}
+
+func bookTicket(remainingTickets uint, firstName string, lastName string, email string, userTickets uint, bookings []string), confName string (uint, []string) {
+	// function for booking ticket
+	remainingTickets = remainingTickets - userTickets
+	bookings = append(bookings, firstName + " " + lastName)
+	//userName = "Bruka 
+	//userTickets = 2
+
+	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
+    
 }
