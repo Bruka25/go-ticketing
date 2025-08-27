@@ -104,7 +104,7 @@ func getUserInput()(string, string, string, uint) {
 
 }
 
-func bookTicket(remainingTickets uint, firstName string, lastName string, email string, userTickets uint, bookings []string), confName string (uint, []string) {
+func bookTicket(remainingTickets uint, firstName string, lastName string, email string, userTickets uint, bookings []string, confName string) (uint, []string) {
 	// function for booking ticket
 	remainingTickets = remainingTickets - userTickets
 	bookings = append(bookings, firstName + " " + lastName)
@@ -113,5 +113,6 @@ func bookTicket(remainingTickets uint, firstName string, lastName string, email 
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
-    
+	
+	return remainingTickets, bookings
 }
