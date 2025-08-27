@@ -22,9 +22,10 @@ for {
 
 	isValidName, isValidEmail, isValidTicketNumber :=  validateInput(firstName, lastName, email, userTickets, remainingTickets)
 
+    if isValidName && isValidEmail && isValidTicketNumber {
 	
-	bookTicket(remainingTickets, firstName, lastName, email, userTickets, bookings, confName)
-	
+	bookTicket(remainingTickets, userTickets, &bookings, firstName, lastName, email, confName)
+
 	// function to call the first ticket of the ticket bookers
 	var firstNames = getFirstName(bookings)
 	fmt.Printf("The first names of bookings are: %v\n", firstNames)
@@ -46,6 +47,7 @@ for {
 	}
 	
 }	
+}
 }
 
 func greetUsers(confName string, conferenceTickets int, remainingTickets int) {
@@ -104,15 +106,12 @@ func getUserInput()(string, string, string, uint) {
 
 }
 
-func bookTicket(remainingTickets uint, firstName string, lastName string, email string, userTickets uint, bookings []string, confName string) (uint, []string) {
+func bookTicket(remainingTickets uint, userTickets uint, bookings *[]string, firstName string, lastName string, email string, confName string) {
 	// function for booking ticket
 	remainingTickets = remainingTickets - userTickets
-	bookings = append(bookings, firstName + " " + lastName)
-	//userName = "Bruka 
-	//userTickets = 2
+	*bookings = append(*bookings, firstName + " " + lastName)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
 	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
-	
-	return remainingTickets, bookings
 }
+	
