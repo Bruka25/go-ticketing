@@ -3,118 +3,104 @@ package main
 import (
 	"fmt"
 	"go-ticketing/share"
-	"strconv"
-	"strings"
 )
 
 var confName = "Go conference"
 const conferenceTickets uint = 50
-var remainingTickets uint= 50
-var bookings = []string{}
+var remainingTickets uint = 50
+var bookings = make([]userData, 0) // Updated to use userData struct
+
+type userData struct {
+    firstName       string
+    lastName        string
+    email           string
+    numberOfTickets uint
+}
 
 func main() {
+    greetUsers()
 
-greetUsers()
+    fmt.Printf("conferenceTickets is %T, confName is %T, remainingTickets is %T\n", conferenceTickets, confName, remainingTickets)
 
-fmt.Printf("conferenceTickets is %T, confName is %T, remainingTickets is %T\n", conferenceTickets, confName, remainingTickets)
+    for {
+        firstName, lastName, email, userTickets := getUserInput()
 
-for {
-   
+        isValidName, isValidEmail, isValidTicketNumber := share.ValidateInput(firstName, lastName, email, userTickets, remainingTickets)
 
-	firstName, lastName, email, userTickets := getUserInput()
+        if isValidName && isValidEmail && isValidTicketNumber {
+            bookTicket(userTickets, firstName, lastName, email)
 
-	isValidName, isValidEmail, isValidTicketNumber :=  share.ValidateInput(firstName, lastName, email, userTickets, remainingTickets)
+            // Display the first names of all bookings
+            var firstNames = getFirstName(bookings)
+            fmt.Printf("The first names of bookings are: %v\n", firstNames)
 
-    if isValidName && isValidEmail && isValidTicketNumber {
-	
-	bookTicket(remainingTickets, userTickets, &bookings, firstName, lastName, email, confName)
-
-	// function to call the first ticket of the ticket bookers
-	var firstNames = getFirstName(bookings)
-	fmt.Printf("The first names of bookings are: %v\n", firstNames)
-
-	if remainingTickets == 0 {
-		//end the program
-		fmt.Println("The conference is booked out")
-		break
-	} else {
-		if !isValidName {
-			fmt.Println("your first name or last name is too short")
-		}
-		if !isValidEmail {
-			fmt.Println("your email address is not valid")
-		}
-		if !isValidTicketNumber {
-			fmt.Println("your ticket number is invalid")
-		}
-	}
-	
-}	
-}
+            if remainingTickets == 0 {
+                // End the program
+                fmt.Println("The conference is booked out")
+                break
+            }
+        } else {
+            if !isValidName {
+                fmt.Println("Your first name or last name is too short")
+            }
+            if !isValidEmail {
+                fmt.Println("Your email address is not valid")
+            }
+            if !isValidTicketNumber {
+                fmt.Println("Your ticket number is invalid")
+            }
+        }
+    }
 }
 
 func greetUsers() {
-	fmt.Printf("Welcome to %v the booking application!\n", confName)
-
-    fmt.Printf("we have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
+    fmt.Printf("Welcome to %v the booking application!\n", confName)
+    fmt.Printf("We have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
     fmt.Println("Get your tickets here to attend")
-
 }
 
-func getFirstName(bookings []string) []string {
-	firstNames := []string{}
-	for _, booking := range bookings {
-		var names = strings.Fields(booking)
-		firstNames = append(firstNames, names[0])
-	}
-	return firstNames
-
+func getFirstName(bookings []userData) []string {
+    firstNames := []string{}
+    for _, booking := range bookings {
+        firstNames = append(firstNames, booking.firstName)
+    }
+    return firstNames
 }
 
+func getUserInput() (string, string, string, uint) {
+    var firstName string
+    var lastName string
+    var email string
+    var userTickets uint
 
+    fmt.Println("Enter your first name:")
+    fmt.Scan(&firstName)
 
-func getUserInput()(string, string, string, uint) {
-	var firstName string
-	var lastName string
-	var email string
-	var userTickets uint
-	// ask a user for their name
-	
-	
+    fmt.Println("Enter your last name:")
+    fmt.Scan(&lastName)
 
-	//fmt.Println(remainingTickets)
-	//fmt.Println(&remainingTickets)
-	fmt.Println("Enter your first name:")
-	 fmt.Scan(&firstName)
+    fmt.Println("Enter your Email:")
+    fmt.Scan(&email)
 
-	fmt.Println("Enter your last name:")
-	fmt.Scan(&lastName)
+    fmt.Println("Enter number of tickets:")
+    fmt.Scan(&userTickets)
 
-	fmt.Println("Enter your Email:")
-	fmt.Scan(&email)
-
-
-	fmt.Println("Enter number of tickets:")
-	fmt.Scan(&userTickets)
-
-	return firstName, lastName, email, userTickets
-
+    return firstName, lastName, email, userTickets
 }
 
-func bookTicket(remainingTickets uint, userTickets uint, bookings *[]string, firstName string, lastName string, email string, confName string) {
-	// function for booking ticket
-	remainingTickets = remainingTickets - userTickets
+func bookTicket(userTickets uint, firstName string, lastName string, email string) {
+    // Update remaining tickets
+    remainingTickets = remainingTickets - userTickets
 
-	//create a map to store user data
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["email"] = email
-	userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+    // Create a userData struct to store user data
+    var user = userData{
+        firstName:       firstName,
+        lastName:        lastName,
+        email:           email,
+        numberOfTickets: userTickets,
+    }
+    bookings = append(bookings, user)
 
-	*bookings = append(*bookings, firstName + " " + lastName)
-
-	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
-	fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
+    fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
+    fmt.Printf("%v tickets remaining for %v\n", remainingTickets, confName)
 }
-	
