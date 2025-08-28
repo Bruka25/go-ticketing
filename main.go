@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"go-ticketing/share"
+	"strconv"
 	"strings"
 )
 
@@ -103,6 +104,14 @@ func getUserInput()(string, string, string, uint) {
 func bookTicket(remainingTickets uint, userTickets uint, bookings *[]string, firstName string, lastName string, email string, confName string) {
 	// function for booking ticket
 	remainingTickets = remainingTickets - userTickets
+
+	//create a map to store user data
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["email"] = email
+	userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
 	*bookings = append(*bookings, firstName + " " + lastName)
 
 	fmt.Printf("Thank you %v %v for booking %v tickets. You will receive a confirmation email at %v\n", firstName, lastName, userTickets, email)
