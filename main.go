@@ -5,13 +5,14 @@ import (
 	"strings"
 )
 
-func main() {
 var confName = "Go conference"
 const conferenceTickets uint = 50
 var remainingTickets uint= 50
 var bookings = []string{}
 
-greetUsers(confName, int(conferenceTickets), int(remainingTickets))
+func main() {
+
+greetUsers()
 
 fmt.Printf("conferenceTickets is %T, confName is %T, remainingTickets is %T\n", conferenceTickets, confName, remainingTickets)
 
@@ -50,7 +51,7 @@ for {
 }
 }
 
-func greetUsers(confName string, conferenceTickets int, remainingTickets int) {
+func greetUsers() {
 	fmt.Printf("Welcome to %v the booking application!\n", confName)
 
     fmt.Printf("we have a total of %v tickets and %v are still available\n", conferenceTickets, remainingTickets)
@@ -68,15 +69,7 @@ func getFirstName(bookings []string) []string {
 
 }
 
-func validateInput(firstName string, lastName string, email string, userTickets uint, remainingTickets uint ) (bool, bool, bool){
-	isValidName := len(firstName) >= 2 && len(lastName) >= 2
-	isValidEmail := strings.Contains(email, "@")
-	isValidTicketNumber := userTickets > 0 && userTickets <= remainingTickets
 
-	return isValidName, isValidEmail, isValidTicketNumber
-
-	
-}
 
 func getUserInput()(string, string, string, uint) {
 	var firstName string
