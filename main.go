@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"go-ticketing/share"
 	"strings"
 )
 
@@ -21,7 +22,7 @@ for {
 
 	firstName, lastName, email, userTickets := getUserInput()
 
-	isValidName, isValidEmail, isValidTicketNumber :=  validateInput(firstName, lastName, email, userTickets, remainingTickets)
+	isValidName, isValidEmail, isValidTicketNumber :=  share.ValidateInput(firstName, lastName, email, userTickets, remainingTickets)
 
     if isValidName && isValidEmail && isValidTicketNumber {
 	
