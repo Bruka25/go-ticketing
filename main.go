@@ -119,7 +119,7 @@ func bookTicket(userTickets uint, firstName string, lastName string, email strin
 }
 
 func sendTicket(userTickets uint, firstName string, lastName string, email string) {
-	time.Sleep(10 * time.Second)
+	time.Sleep(30 * time.Second)
 	var tickets = fmt.Sprintf(" %v tickets for %v %v", userTickets, firstName, lastName)
 	fmt.Println("###################")
 	fmt.Printf("Sending ticket\n %v to email address %v\n", tickets, email)
